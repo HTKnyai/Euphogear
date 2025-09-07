@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /cases/{docId} {
+      allow read: if true;   // 公開読み取り
+      allow write: if false; // 管理者画面ができるまでは禁止
+    }
+    match /inquiries/{docId} {
+      allow read, write: if false; // サーバー経由のみ
+    }
+  }
+}
