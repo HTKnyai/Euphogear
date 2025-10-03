@@ -2,7 +2,14 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-declare global { interface Window { grecaptcha: any } }
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
 
 type FormData = {
   name: string;
